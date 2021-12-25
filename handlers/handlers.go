@@ -16,6 +16,10 @@ func Handlers() {
 
 	router.HandleFunc("/registro", middlewares.CheckDB(routers.Registro)).Methods("POST")
 
+	router.HandleFunc("/login", middlewares.CheckDB(routers.Login)).Methods("POST")
+
+	router.HandleFunc("/perfil", middlewares.CheckDB(middlewares.VerifyJWT(routers.Perfil))).Methods("GET")
+
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
 		PORT = "8080"
